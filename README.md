@@ -33,9 +33,9 @@ Chartkick.options = {
   colors: ["#b00", "#666"]
 }
   
-Chartkick.options[]
+Chartkick.options[:html] = '<div id="%{id}" style-"height: %{height};">Loading...</div>'
   
-Chartkick.options[] = :charts_js
+Chartkick.options[:content_for] = :charts_js
   
 gem "chartkick"
 
@@ -84,9 +84,9 @@ Chartkick.eachChart( function(chart){
 <%= scatter_chart City.pluck(:size, :population) %>
 <%= geo_chart Medal.group(:country).count %>
 <%= timeline [
-   ["", "", ""],
-   ["", "", ""],
-   ["", "", ""]
+   ["Washington", "1789-04-29", "1797-03-03"],
+   ["Adams", "1797-03-03", "1801-03-03"],
+   ["Jefferson", "1801-03-03", "1809-03-03"]
  ] %>
   
 <%= line_chart @goals.map { |goal|
@@ -94,11 +94,11 @@ Chartkick.eachChart( function(chart){
  }%>
 <%= line_chart completed_tasks_charts_path %>  
   
-<%= line_chart data, id: "", width: "", height: "" %>
+<%= line_chart data, id: "user-chart", width: "800px", height: "500px" %>
  
 <%= line_chart data, min: 1000, max: 5000 %>
 
-<%= line_chart data, colors: ["", ""] %>
+<%= line_chart data, colors: ["#b00", "#666"] %>
   
 <%= column_chart data, stacked: true %>
   
@@ -106,7 +106,7 @@ Chartkick.eachChart( function(chart){
   
 <%= line_chart data, label: "Value" %>
 
-<%= line_chart data, xtitle: "", ytitle: "" %>
+<%= line_chart data, xtitle: "Time", ytitle: "Populatoin" %>
   
 <%= line_chart data, curve: false %>
   
@@ -139,13 +139,15 @@ Chartkick.eachChart( function(chart){
 <%= yeild :chart_js %>
 <%= yeild_content :charts_js %>
 
-<%= pie_chart() %>
-<%= pie_chart [] %>
+<%= pie_chart({"Football"} => 10, "Basketball" => 5) %>
+<%= pie_chart ["Football", 10], ["Basketball", 5] %>
   
 <%= line_chart [
-   {name: "", data: series_a},
-   {name: "", data: series_b}
+   {name: "Series A", data: series_a},
+   {name: "Series B", data: series_b}
  ] %>
+  
+ <%= line_chart({20.day.ago => 5, "2013-05-07 00:00:00 UTC" => 7}) %>
   
 <%= line_chart data, code: true %>
   
