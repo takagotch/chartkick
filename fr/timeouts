@@ -1,0 +1,2 @@
+<%= line_chart completed_tasks_charts_path %>
+
